@@ -19,12 +19,7 @@
 
   <article class="markdown-body">
     <h1 class="wiki-title">Focused Game Design, Progression, and Player Agency</h1>
-    <p><em>How accumulated taste, a concentrated core, progression structure, reward timing, and meaningful resource choices shaped one finite incremental game.</em></p>
-
-    <h2>Study both strong and weak games</h2>
-    <p>Payne Robinson’s principal design recommendation is to play many games, study why the enjoyable ones are fun, and apply the same scrutiny while making a game. He entered the incremental genre through large annual recommendation lists and found thousands of games made with tools ranging from JavaScript and React to PowerPoint. He played across the genre, compared what he considered its best and worst games, and looked for recurring patterns.</p>
-    <p>Robinson connects this method to his literature background, which trained him to recognize relationships and recurring patterns across works. He describes taste as similarly cumulative: his judgment that an aesthetic looks good reflects thousands of hours of play and the influence of designers whose work he has consumed. The art, nostalgia, and overall aesthetic of <em>Execute</em> mattered to its design even when he could not reduce their effect to a formula.</p>
-    <p>His earlier music-production experience also shaped this judgment. After making thousands of songs, he became more comfortable distinguishing an idea worth finishing from one that was unlikely to become a good song. He applies the same principle to games: unfinished experiments can develop the ability to discard weak ideas and identify stronger ones. This position differs from advice that every game must be finished.</p>
+    <p><em>How a concentrated core, finite progression, reward timing, activity level, and meaningful resource choices shaped one incremental game.</em></p>
 
     <h2>Concentrate everything around the core</h2>
     <p>Robinson argues that a game with a strong central idea should remove additions that do not serve it. In his terminology, a “perfect” game is one in which every part reinforces that core. This is an attributed design preference rather than a universal definition of quality.</p>
@@ -42,9 +37,28 @@
     <p>The familiar pattern is for numbers to rise. <em>Execute</em> reverses the direction: its count falls as the player deletes everyone on the planet. Robinson also disliked incrementals that continued forever, so he gave the game a definite end. He reports that some players welcomed a game they could play for four or five hours and then finish, and he believed that this happened to align with a broader movement toward shorter games on Steam.</p>
     <p>That reception was not uniform. Robinson says the negative reviews he received asked why the game was not longer. A finite incremental may satisfy players looking for a bounded experience while disappointing players who expect longer progression.</p>
 
+    <h2>Condense a complex loop</h2>
+    <p>Robinson describes a personal method of finding a game he enjoys but considers too complicated, identifying the satisfying loop, and compressing it into something he can build. <em>Factorio</em> supplied the model for <em>Execute</em>’s connected production problems: obtaining a new machine creates a fuel or resource bottleneck, solving that bottleneck enables another capability, and the player repeatedly moves between machines.</p>
+    <p>He wanted that rhythm without requiring players to design factory layouts or coding-like production architecture. The implementation was limited to techniques he considered achievable in his first commercial Godot game: primarily buttons, static animations, and a shader-assisted impression of growing quantities. The broader method for selecting and testing such ideas appears in <a href="./finding-testing-and-refining-game-ideas.html">Finding, Testing, and Refining Game Ideas</a>.</p>
+
+    <h2>Active and passive play</h2>
+    <p><em>Execute</em> permits players to engage actively or leave its production running. Robinson can complete it actively in approximately two hours, while he has seen more passive players take approximately seven hours. The game is nevertheless balanced toward active play.</p>
+    <p>A player who leaves the game running can return with enough resources to buy many things at once. That skips the intended sequence in which a machine arrives, the player experiences its novelty and power increase, and several minutes pass before the next addition. Passive access therefore does not mean that active and passive play receive an equally satisfying reward cadence.</p>
+    <p>Emerson contrasts this with <em>A Game About Feeding a Black Hole</em>, whose main mode was deliberately designed to require active movement. The conversation presents these as different design choices rather than treating either level of activity as mandatory for incremental games.</p>
+
+    <h2>Balance backward from a fixed total</h2>
+    <p>Instead of allowing its principal number to grow indefinitely, <em>Execute</em> counts the world population down from approximately eight billion to zero. Robinson found it unusual and difficult to balance progression backward from a known ending.</p>
+    <p>An early implementation used an API to obtain the current population. When the call proved unreliable, he disabled it and updated the number manually. Current real-world accuracy was not considered worth introducing a failure point into the game. The related technical tradeoffs appear in <a href="./code-organization-performance-and-technical-constraints.html">Code Organization, Performance, and Technical Constraints</a>.</p>
+
     <h2>Fantasy, tone, and nostalgia</h2>
     <p>Robinson draws on Jonas Tyroller’s advice that a good game sells a fantasy. He describes <em>Execute</em> as offering a disturbing but recognizable destruction fantasy: a child who builds a block tower or elaborate Lego set may also want to crush it. The game asks what it would be like to destroy the world without consequences.</p>
     <p>The handling of that fantasy is deliberately simplified. The result is gory and “messed up,” in Robinson’s description, but remains cartoony enough for the player to suspend the atrocities being performed. He also regards nostalgia as part of the game’s appeal. The fantasy, cartoon treatment, art, and nostalgic quality operate together rather than as separable mechanical rules.</p>
+
+    <h3>Abstracting the victims</h3>
+    <p>Robinson deliberately avoided depicting the victims as one identifiable group. His Brazilian artist initially drew a blue victim and red executioner. Robinson rejected that red-versus-blue division while noting that he lived in the United States and expected it to be an important market. He suggested gray figures; the artist preferred blue visually, and the figures became one blue group.</p>
+    <p>Players asked for randomly generated names or identifiable people. Robinson rejected that specificity because the game concerns eliminating the population and he did not want to represent the victims as particular real people.</p>
+    <p>He implemented but withheld a feature that could place an uploaded face on a victim. He believed the resulting images could be highly shareable, but also expected users to target inappropriate real people. Emerson agreed that the feature had promotional upside but substantial misuse and reputational risk. Robinson had not released it at the time of the conversation.</p>
+    <p>Robinson believes the genocide framing discouraged some creators from covering the game, including creators who redeemed keys without publishing coverage. This is his interpretation rather than a confirmed explanation from those creators. The visibility consequences are covered in <a href="./game-visibility-steam-launches-and-creator-outreach.html">Game Visibility, Steam Launches, and Creator Outreach</a>.</p>
 
     <h2>Rebuilds and cuts in service of progression</h2>
     <p>Robinson made <em>Execute</em> twice before completing its third version. He also made six versions of <em>Grid Tweaker</em>, stopped work on a seventh, and expected that he might rebuild it again. The repeated versions reflect his willingness to retain a useful idea while replacing an execution that is either beyond his current skills or no longer serving the design.</p>
@@ -59,7 +73,7 @@
     </ul>
     <p>He concluded that this version was too bloated for him to organize and shelved it. For the third version, he combined parts of the simpler first design with selected ideas from the second. He removed much of the world map, many planned machines, and options that were individually appealing but did not add enough to the player experience.</p>
     <p>His design reason was the progression curve. He believed players primarily wanted a satisfying progression and that the additional machines could disrupt it. Available time also allowed him to make only one curve feel satisfying, so he concentrated on that curve rather than retaining more options. He attributes part of the game’s reception to this focus.</p>
-    <p>These iterations also involved engine learning and code-organization constraints; their fuller production context is covered in <a href="./learning-game-development-and-organizing-code.html">Learning Game Development and Organizing Code</a>. The relationship between available time, feature cuts, and a sustainable project is treated more broadly in <a href="./project-scope-risk-and-sustainable-development.html">Project Scope, Risk, and Sustainable Development</a>.</p>
+    <p>These iterations also involved engine learning and code-organization constraints; their fuller production context is covered in <a href="./code-organization-performance-and-technical-constraints.html">Code Organization, Performance, and Technical Constraints</a>. The relationship between available time, feature cuts, and a sustainable project is treated more broadly in <a href="./project-scope-risk-and-sustainable-development.html">Project Scope, Risk, and Sustainable Development</a>.</p>
 
     <h2>Two common forms of prestige</h2>
     <p>Robinson describes prestige as a common incremental-game structure with two prevalent forms:</p>
@@ -91,33 +105,21 @@
     <p>He believes <em>Execute</em> reviewed better partly because a reward could remain out of reach and prompt optimization instead of arriving on every cycle. That claim is Robinson’s explanation of the reviews rather than a demonstrated causal finding.</p>
     <p>The tradeoff depends on the audience. Some players want the predictable binary experience. Robinson compares formula-driven mass appeal with <em>Assassin’s Creed</em> and <em>Call of Duty</em>: consumers can enter a familiar structure without having to think deeply about what they are consuming. He considers that a valid way to make money, although it is not the experience he wants to create.</p>
 
-    <h2>Broken, mediocre, formulaic, and distinctive games</h2>
-    <p>Robinson’s quality distinctions are personal opinions rather than general laws:</p>
-    <ul>
-      <li><strong>Inherently enjoyable:</strong> he thinks most incremental games are fun because people enjoy buying something and becoming progressively better. Text and rising numbers can be enough to establish that baseline.</li>
-      <li><strong>Broken or badly received:</strong> he says an unfun game generally fails to work or has a core mechanic that behaves very differently from player expectations. He associates many such games with asset flips made by developers treating the market as a gold rush.</li>
-      <li><strong>Mediocre:</strong> a functional game can merely repeat what already exists. Copying <em>Universal Paper Clips</em> or making a generic platformer may still work, but Robinson expects players to find it unremarkable because they have seen it before. In his estimate, making a terrible game is difficult while making a mediocre one is easy; he describes roughly 70–75% positive Steam reception as an accessible floor.</li>
-      <li><strong>Formulaic:</strong> a developer can use established skill counts, reward intervals, exponential curves, familiar structures, and a new visual treatment to target a dependable result. Robinson points to <em>Fortnite</em> and <em>Call of Duty</em> as games that have systematized engagement. He recounts a video claiming that a <em>Call of Duty</em> map can present a target at a window every eight to ten seconds, while also observing that annual <em>Call of Duty</em> releases are still regarded as approximately eight-out-of-ten games rather than perfect ones.</li>
-      <li><strong>Distinctive:</strong> reaching what Robinson describes as the 85–90% range requires creativity. A game seeking a still higher level of response must offer something players have not seen before.</li>
-    </ul>
-
-    <h2>Formula, genre knowledge, and novelty</h2>
-    <p>Robinson does not reject formulas outright. Incremental development can be comparatively accessible because a game can be built from buttons, and a developer who understands the genre can combine its expected core principles with an original twist. In that qualified sense, he agrees that it can resemble “easy mode.” The game must still be appealing and must meet genre expectations.</p>
-    <p>He considers simple imitation less durable. Some unoriginal incremental games had recently sold well because the audience was especially interested in the genre, but he would not stake all of his work on copying a currently popular asteroid-destruction game for an expected return. He also cites diminishing response to later <em>Assassin’s Creed</em> installments as an example, in his opinion, of audiences tiring of the same underlying formula despite additions around it.</p>
-    <p>His preferred method is to understand multiple formulas, mix them, and create a new one. Gocey summarizes this as taking inspiration from several places without copying and pasting any one of them, then adding one’s own idea. Established formulas can produce a competent, familiar game; Robinson reserves his strongest praise for games that recombine influences into something distinctive.</p>
   </article>
 
   <footer class="markdown-body">
     <h4>Sources</h4>
     <ol>
       <li><a href="../raw/how-one-solo-dev-turned-a-small-game-into-a-cult-classic.txt">How One Solo Dev Turned a Small Game Into a Cult Classic</a></li>
+      <li><a href="../raw/payne-robinson-on-finding-good-game-ideas-and-making-a-success-game.txt">Payne Robinson: On finding good Game Ideas, and making a Success Game | Scope Creepers a Game Dev</a></li>
     </ol>
     <h4>Related pages</h4>
     <ul>
-      <li><a href="./learning-game-development-and-organizing-code.html">Learning Game Development and Organizing Code</a></li>
+      <li><a href="./finding-testing-and-refining-game-ideas.html">Finding, Testing, and Refining Game Ideas</a></li>
+      <li><a href="./code-organization-performance-and-technical-constraints.html">Code Organization, Performance, and Technical Constraints</a></li>
       <li><a href="./emerging-game-genres-and-market-timing.html">Emerging Game Genres and Market Timing</a></li>
       <li><a href="./project-scope-risk-and-sustainable-development.html">Project Scope, Risk, and Sustainable Development</a></li>
-      <li><a href="./steam-launch-visibility-and-creator-outreach.html">Steam Launch Visibility and Creator Outreach</a></li>
+      <li><a href="./game-visibility-steam-launches-and-creator-outreach.html">Game Visibility, Steam Launches, and Creator Outreach</a></li>
     </ul>
   </footer>
 

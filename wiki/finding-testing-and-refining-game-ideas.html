@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finding, Testing, and Refining Game Ideas — Video Game Creator</title>
+  <link href="./styles.css" rel="stylesheet">
+</head>
+<body>
+
+  <nav class="wiki-nav">
+    <p><a href="../index.html">← Return to Index</a></p>
+    <div class="wiki-text-controls" aria-label="Text size controls">
+      <button type="button" data-text-size="decrease" aria-label="Decrease text size">A-</button>
+      <button type="button" data-text-size="increase" aria-label="Increase text size">A+</button>
+    </div>
+    <p><a href="./focused-game-design-progression-and-player-agency.html">Focused Game Design, Progression, and Player Agency →</a></p>
+  </nav>
+
+  <article class="markdown-body">
+    <h1 class="wiki-title">Finding, Testing, and Refining Game Ideas</h1>
+    <p><em>How accumulated game literacy, recombined influences, practical constraints, and low-friction prototypes can help developers select and refine ideas.</em></p>
+
+    <h2>Develop judgment by studying many games</h2>
+    <p>Payne Robinson attributes much of his judgment about game ideas to playing widely and repeatedly examining why games work. As a child, he read gaming magazines and reviews even for games he did not play. He compared different reviewers’ reactions, followed their references to earlier games, and investigated why one implementation was considered better than another.</p>
+    <p>He compares this process with a documentary account of Quentin Tarantino watching and studying the films available through the video store where he worked. In Robinson’s analogy, a large repertoire supplies techniques, characters, situations, and structures that can later be brought together. Some borrowing is conscious, while other influences become apparent only in retrospect.</p>
+    <p>Robinson’s literature background similarly trained him to recognize relationships and recurring patterns across works. He describes taste as cumulative: judgments about whether a mechanic or aesthetic feels right reflect thousands of hours of play and the influence of many designers, even when the judgment cannot be reduced to a formula.</p>
+    <p>His earlier music-production experience supplied another form of repetition. After making thousands of songs, he became more comfortable distinguishing an idea worth finishing from one unlikely to become a satisfying song. He applies the same principle to games: unfinished experiments can develop the ability to discard weak ideas and identify stronger ones. This differs from advice that every game must be completed.</p>
+
+    <h2>Recombine influences rather than copy one game</h2>
+    <p>Robinson identifies <em>Plague Inc.</em>, <em>Destroy All Humans</em>, <em>Defend Your Castle</em>, <em>Stick RPG</em>, and possibly <em>Interactive Buddy</em> among the influences visible in <em>Execute</em>. These games did not supply one template. He describes bringing together parts of several experiences into a new combination.</p>
+    <p><em>Defend Your Castle</em> illustrates the distinction between copying a mechanic and extracting the experience beneath it. Its physics-based mouse interaction differs from <em>Execute</em>, but Robinson recognized that exerting visceral power over small figures was enjoyable. Because physics programming was outside his preferred skill set, he sought a technically simpler way to produce that feeling.</p>
+    <p>His preferred approach is to understand multiple formulas, combine them, and add an idea of his own. Established formulas can produce a competent, familiar game; Robinson reserves his strongest praise for games that recombine influences into something players have not seen before.</p>
+
+    <h2>Reuse conventions where novelty has little value</h2>
+    <p>Broad game literacy also informs small interaction decisions. Both Robinson and Emerson argue that developers should reuse familiar solutions when a new convention would only create friction. Their examples include following a widely understood inventory pattern such as <em>Minecraft</em>’s, using Escape as the obvious PC route to pause a game, and keeping settings reachable during play rather than requiring several steps back to the main menu.</p>
+    <p>This borrowing is distinct from copying a game’s identity. A developer can preserve conventional controls and interface expectations while using novelty for the mechanic, fantasy, or structure that differentiates the project.</p>
+
+    <h2>Match the idea to personal taste and available capability</h2>
+    <p>Robinson says he must like a game himself, but he also checks whether other people respond to it. Selection therefore includes both personal interest and external testing.</p>
+    <p>He deliberately filtered <em>Execute</em> through what he could implement well in his first commercial Godot game. Its initial boundaries were buttons, static sprite animations, and one currency, although the completed design grew to roughly ten currencies. Much of its apparent activity still came from buttons, static animation, and a ChatGPT-assisted shader that made purchased guillotines appear to multiply.</p>
+    <p>Robinson describes a recurring method of taking a game he likes but finds too complicated and condensing its satisfying loop. <em>Factorio</em> influenced the sequence in which a new machine creates a fuel or resource bottleneck, solving that bottleneck enables another capability, and the player repeatedly moves among connected production problems. <em>Execute</em> sought that factory-game rhythm without requiring players to construct complex automation or software-like architecture. Its detailed progression appears in <a href="./focused-game-design-progression-and-player-agency.html">Focused Game Design, Progression, and Player Agency</a>.</p>
+    <p>Constraints are therefore treated as creative inputs. Rather than begin with everything a larger game could contain, Robinson asks what can be made fun within the techniques, time, and organization available to him.</p>
+    <p>An early Roblox project made with a friend provides a rough predecessor. In <em>Space Scrappers</em>, players flew spaceships around a track compared with Rainbow Road, collected scrap, and returned to a mothership after falling off or running out of fuel to purchase or upgrade ships and travel farther. Robinson says the team rendered everything at once, achieved only approximately 20 frames per second, and lacked established terminology, but approximately 10,000 people played it. Roblox tycoon games and their repeated upgrade structure helped lead him toward incremental games even though their embodied, world-based play looked different from older button-driven examples.</p>
+
+    <h2>Broken, formulaic, and distinctive results</h2>
+    <p>Robinson’s quality distinctions are personal opinions rather than general laws:</p>
+    <ul>
+      <li><strong>Inherently enjoyable:</strong> he thinks most incremental games begin with an engaging baseline because people enjoy purchasing improvements and watching numbers change. Text and rising numbers can be enough to establish that baseline.</li>
+      <li><strong>Broken or badly received:</strong> an unfun game may fail to work or may make its core mechanic behave very differently from player expectations. He associates many examples with asset flips made by developers treating a market opening only as a gold rush.</li>
+      <li><strong>Mediocre:</strong> a functional game can merely repeat what players have already seen. Copying <em>Universal Paper Clips</em> or making a generic platformer may work, but Robinson expects it to be unremarkable. In his estimate, making a terrible game is difficult while making a mediocre one is easy; he describes roughly 70–75% positive Steam reception as an accessible floor.</li>
+      <li><strong>Formulaic:</strong> established skill counts, reward intervals, exponential curves, familiar structures, and a new visual treatment can target a dependable result. Robinson points to <em>Fortnite</em> and <em>Call of Duty</em> as games that systematize engagement. He recounts a video claiming that a <em>Call of Duty</em> map can present a target at a window every eight to ten seconds, while observing that annual releases are still regarded as approximately eight-out-of-ten games rather than perfect ones.</li>
+      <li><strong>Distinctive:</strong> reaching what Robinson describes as the 85–90% range requires creativity. A game seeking still stronger reception, in his view, must offer something players have not previously seen.</li>
+    </ul>
+    <p>Robinson does not reject formulas. Incremental development can be comparatively accessible because it can be built from buttons, and a developer who understands the genre can combine expected principles with an original twist. In that qualified sense, he agrees that it can resemble “easy mode,” while maintaining that the game must still be appealing and meet genre expectations.</p>
+    <p>He considers simple imitation less durable. Some unoriginal incrementals had recently sold well because demand for the genre was unusually active, but he would not stake his work on copying a successful asteroid-destruction premise. He cites diminishing response to later <em>Assassin’s Creed</em> installments as an example, in his opinion, of audiences tiring of the same underlying formula despite surrounding additions.</p>
+    <p>He provocatively says that studying enough games can make it difficult to create something bad. He also calls this confidence potentially privileged or hubristic, expects that a later project may fail, and accepts that most creators need to make poor games while learning. He reports that each of his earlier Roblox or itch releases attracted at least approximately 10,000 players, while <em>Execute</em> was his first commercial Steam game; those results provide the context for his confidence rather than proving a general success rate.</p>
+
+    <h2>Use itch as a low-friction proving ground</h2>
+    <p>Robinson and Emerson describe itch as useful beyond adult games and game-jam entries. An unfinished or rough demo can test whether people will engage with an idea while also rehearsing the work of presenting it publicly.</p>
+    <p>They recommend treating a demo release as a small event without requiring final polish:</p>
+    <ul>
+      <li>prepare and announce the page deliberately;</li>
+      <li>conduct limited creator outreach;</li>
+      <li>post to applicable communities such as Reddit;</li>
+      <li>use a revised or separate page to test another version when useful;</li>
+      <li>observe both the response to the game and the effectiveness of its presentation.</li>
+    </ul>
+    <p>Robinson reports that one Reddit post brought approximately 40,000 players to the first rough <em>Execute</em> demo. Emerson says the itch version of <em>A Game About Feeding a Black Hole</em> continued receiving substantial play and that the team planned to update it to direct players toward the finished Steam game. The promotional role of these releases is covered further in <a href="./game-visibility-steam-launches-and-creator-outreach.html">Game Visibility, Steam Launches, and Creator Outreach</a>.</p>
+    <p>Robinson’s strongest commercial test is that if players will not try a game when it is free and available with little friction, he doubts they will later pay for it. He abandoned <em>Grid Tweaker</em> because it did not attract enough players and because he did not believe he could execute it at the quality required.</p>
+    <p>He also reports, secondhand from a Jonas Tyroller podcast, that Bippinbits used game jams and itch performance thresholds to decide which prototypes should become Steam projects. Robinson recalls that the <em>Dome Keeper</em> prototype may have reached approximately 500,000 itch plays, but presents that figure as an uncertain recollection rather than verified performance.</p>
+
+    <h2>Validation and finishing develop different skills</h2>
+    <p>Emerson raises a counterpoint to repeated market tests: a developer can become trapped in “prototyping hell,” continually seeking an idea that meets a threshold without practicing completion. Finishing, packaging, and releasing a final product are separate capabilities.</p>
+    <p>The speakers do not resolve this into a rule that every prototype should be finished or abandoned. Low-friction testing can limit investment in an idea that attracts no response, while repeated completion develops skills that prototypes do not. The broader relationship among abandonment, project length, and release is treated in <a href="./project-scope-risk-and-sustainable-development.html">Project Scope, Risk, and Sustainable Development</a>.</p>
+  </article>
+
+  <footer class="markdown-body">
+    <h4>Sources</h4>
+    <ol>
+      <li><a href="../raw/how-one-solo-dev-turned-a-small-game-into-a-cult-classic.txt">How One Solo Dev Turned a Small Game Into a Cult Classic</a></li>
+      <li><a href="../raw/payne-robinson-on-finding-good-game-ideas-and-making-a-success-game.txt">Payne Robinson: On finding good Game Ideas, and making a Success Game | Scope Creepers a Game Dev</a></li>
+    </ol>
+    <h4>Related pages</h4>
+    <ul>
+      <li><a href="./focused-game-design-progression-and-player-agency.html">Focused Game Design, Progression, and Player Agency</a></li>
+      <li><a href="./project-scope-risk-and-sustainable-development.html">Project Scope, Risk, and Sustainable Development</a></li>
+      <li><a href="./game-visibility-steam-launches-and-creator-outreach.html">Game Visibility, Steam Launches, and Creator Outreach</a></li>
+      <li><a href="./emerging-game-genres-and-market-timing.html">Emerging Game Genres and Market Timing</a></li>
+    </ul>
+  </footer>
+
+  <script src="./wiki-nav.js"></script>
+</body>
+</html>
