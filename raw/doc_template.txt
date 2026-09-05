@@ -1,0 +1,6 @@
+Article title: {string}
+Author/Speaker: (string}
+Date: {YYYY/MM}
+Source Url: {string}
+
+{paste verbatim article content/transcripts here}

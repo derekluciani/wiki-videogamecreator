@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{Topic} Wiki — Index</title>
+  <link href="wiki/styles.css" rel="stylesheet">
+</head>
+<body>
+
+  <nav class="wiki-nav">
+    <p aria-hidden="true"></p>
+    <div class="wiki-text-controls" aria-label="Text size controls">
+      <button type="button" data-text-size="decrease" aria-label="Decrease text size">A-</button>
+      <button type="button" data-text-size="increase" aria-label="Increase text size">A+</button>
+    </div>
+    <p aria-hidden="true"></p>
+  </nav>
+
+  <article class="markdown-body">
+    <h1 class="wiki-title">{Topic} Wiki</h1>
+    <p><em>A synthesis wiki for {replace with purpose/goals}. Each listing links to a synthesis page derived from the immutable sources in <code>/raw</code>.</em></p>
+
+    <h2>I. {Category Name}</h2>
+    <ul>
+      <li><a href="wiki/{article-title}.html"><strong>{Article Title}</strong></a> — {Short description}</li>
+      <li><a href="wiki/{article-title}.html"><strong>{Article Title}</strong></a> — {Short description}</li>
+    </ul>
+    <h2>II. {Category Name}</h2>
+    <ul>
+      <li><a href="wiki/{article-title}.html"><strong>{Article Title}</strong></a> — {Short description}</li>
+      <li><a href="wiki/{article-title}.html"><strong>{Article Title}</strong></a> — {Short description}</li>
+    </ul>
+  </article>
+
+  <footer class="markdown-body wiki-footer">
+    <p>This wiki is owned by Derek Luciani and maintained by LLMs.</p>
+    <p>See the <a href="https://github.com/derekluciani/{repo-name}" target="_blank" rel="noopener noreferrer">Github Repo</a> for knowledge base configuration.</p>
+    <p>See the <a href="wiki/log.html">Change Log</a> for chronological history.</p>
+  </footer>
+
+  <script src="wiki/wiki-nav.js"></script>
+</body>
+</html>
