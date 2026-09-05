@@ -74,6 +74,11 @@
     <h2>Procedural visuals and layered UI</h2>
     <p>The black-hole game’s asteroids were procedurally generated with Godot <code>Polygon2D</code> and <code>Line2D</code> nodes, with AI assistance. Duplicated polygon and line layers represented health, while a clipped progress bar revealed the underlying color as damage accumulated. Emerson calls the construction “stupid” in an affectionate sense: the nodes were used in an unusual but effective way to create the intended appearance.</p>
 
+    <h2>Construct visual assets through unconventional processes</h2>
+    <p>Robinson uses <em>Hylics</em> to describe an accessible physical-to-digital process he calls rasterization. In his account, its creator made forms from clay, photographed them, cut the photographs out in Photoshop, imported them, lowered their resolution, forced their colors into a limited palette, and dithered them. He argues that the assets were constructed and transformed rather than conventionally drawn, and claims that most viewers could make the demonstrated clay shape. “Rasterization” is retained here as Robinson’s terminology and explanation.</p>
+    <p>Robinson says a related technique was used to make <em>Medium Rare</em> and the title transcribed as <em>A Meaningless Random Numbers</em>. In another visually demonstrated example whose exact game is unclear from the transcript, textures do not match and wood textures visibly repeat. He reads that appearance as a willingness to assemble available materials rather than attempt the consistency of a production such as <em>Call of Duty</em>.</p>
+    <p>His broader claim is that indie developers can create interesting and entertaining work by breaking visual and production conventions rather than competing directly on conventional polish. The corresponding design framework appears in <a href="./game-mechanics-variants-and-transformations.html">Game Mechanics, Variants, and Transformations</a>, while the intended effect on audience curiosity appears in <a href="./game-visibility-steam-launches-and-creator-outreach.html">Game Visibility, Steam Launches, and Creator Outreach</a>.</p>
+
     <h2>A custom animation system and timer caps</h2>
     <p>Robinson did not use Godot <code>AnimationPlayer</code> nodes in <em>Execute</em>. His custom system uses a timer to advance through an array of individual PNGs, with a second timer used for some behavior between frames. He prefers separate PNGs to sprite sheets because he can directly replace an array of images and understand what is changing.</p>
     <p>The preference carries a runtime limit. Robinson found Godot timers unreliable at very short intervals such as approximately <code>0.002</code>, particularly in a browser or on older computers. Speed upgrades therefore received hard caps; without them, an apparent upgrade could make the game run more slowly rather than more quickly.</p>
@@ -89,6 +94,7 @@
     <ol>
       <li><a href="../raw/how-one-solo-dev-turned-a-small-game-into-a-cult-classic.txt">How One Solo Dev Turned a Small Game Into a Cult Classic</a></li>
       <li><a href="../raw/payne-robinson-on-finding-good-game-ideas-and-making-a-success-game.txt">Payne Robinson: On finding good Game Ideas, and making a Success Game | Scope Creepers a Game Dev</a></li>
+      <li><a href="../raw/your-indie-game-is-probably-too-normal.txt">Your Indie Game Is Probably Too Normal</a></li>
     </ol>
     <h4>Related pages</h4>
     <ul>
@@ -96,6 +102,8 @@
       <li><a href="./project-scope-risk-and-sustainable-development.html">Project Scope, Risk, and Sustainable Development</a></li>
       <li><a href="./focused-game-design-progression-and-player-agency.html">Focused Game Design, Progression, and Player Agency</a></li>
       <li><a href="./finding-testing-and-refining-game-ideas.html">Finding, Testing, and Refining Game Ideas</a></li>
+      <li><a href="./game-mechanics-variants-and-transformations.html">Game Mechanics, Variants, and Transformations</a></li>
+      <li><a href="./game-visibility-steam-launches-and-creator-outreach.html">Game Visibility, Steam Launches, and Creator Outreach</a></li>
     </ul>
   </footer>
 
