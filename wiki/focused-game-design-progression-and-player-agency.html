@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Focused Game Design, Progression, and Player Agency — Video Game Creator</title>
+  <link href="./styles.css" rel="stylesheet">
+</head>
+<body>
+
+  <nav class="wiki-nav">
+    <p><a href="../index.html">← Return to Index</a></p>
+    <div class="wiki-text-controls" aria-label="Text size controls">
+      <button type="button" data-text-size="decrease" aria-label="Decrease text size">A-</button>
+      <button type="button" data-text-size="increase" aria-label="Increase text size">A+</button>
+    </div>
+    <p><a href="./emerging-game-genres-and-market-timing.html">Emerging Game Genres and Market Timing →</a></p>
+  </nav>
+
+  <article class="markdown-body">
+    <h1 class="wiki-title">Focused Game Design, Progression, and Player Agency</h1>
+    <p><em>How a concentrated core, finite progression, reward timing, activity level, and meaningful resource choices shaped one incremental game.</em></p>
+
+    <h2>Concentrate everything around the core</h2>
+    <p>Robinson argues that a game with a strong central idea should remove additions that do not serve it. In his terminology, a “perfect” game is one in which every part reinforces that core. This is an attributed design preference rather than a universal definition of quality.</p>
+    <p><em>Universal Paper Clips</em> is his model. He describes it as resembling a spreadsheet, possibly written in JavaScript or Python, with Times New Roman text and generic buttons. Its subject is making paper clips, and every button helps the player make more paper clips. Despite consisting only of text and numbers, it held his attention for hours and became, in his opinion, one of the best games he had played. Its presentation demonstrated that a focused mechanical idea could remain engaging after nearly everything else had been stripped away.</p>
+
+    <h2>A mechanics-first incremental pattern</h2>
+    <p>Robinson finds the boundaries among idle, incremental, active-idle, and RPG hybrids poorly organized. Rather than treating those labels as a settled taxonomy, he identifies a recurring construction pattern:</p>
+    <ul>
+      <li>begin with mechanics rather than a setting or content structure;</li>
+      <li>build the loop around one simple mechanic;</li>
+      <li>use that mechanic to acquire more of a resource;</li>
+      <li>provide some form of metaprogression;</li>
+      <li>expand the resource growth into something exponentially large.</li>
+    </ul>
+    <p>The familiar pattern is for numbers to rise. <em>Execute</em> reverses the direction: its count falls as the player deletes everyone on the planet. Robinson also disliked incrementals that continued forever, so he gave the game a definite end. He reports that some players welcomed a game they could play for four or five hours and then finish, and he believed that this happened to align with a broader movement toward shorter games on Steam.</p>
+    <p>That reception was not uniform. Robinson says the negative reviews he received asked why the game was not longer. A finite incremental may satisfy players looking for a bounded experience while disappointing players who expect longer progression.</p>
+
+    <h2>Condense a complex loop</h2>
+    <p>Robinson describes a personal method of finding a game he enjoys but considers too complicated, identifying the satisfying loop, and compressing it into something he can build. <em>Factorio</em> supplied the model for <em>Execute</em>’s connected production problems: obtaining a new machine creates a fuel or resource bottleneck, solving that bottleneck enables another capability, and the player repeatedly moves between machines.</p>
+    <p>He wanted that rhythm without requiring players to design factory layouts or coding-like production architecture. The implementation was limited to techniques he considered achievable in his first commercial Godot game: primarily buttons, static animations, and a shader-assisted impression of growing quantities. The broader method for selecting and testing such ideas appears in <a href="./finding-testing-and-refining-game-ideas.html">Finding, Testing, and Refining Game Ideas</a>.</p>
+
+    <h2>Active and passive play</h2>
+    <p><em>Execute</em> permits players to engage actively or leave its production running. Robinson can complete it actively in approximately two hours, while he has seen more passive players take approximately seven hours. The game is nevertheless balanced toward active play.</p>
+    <p>A player who leaves the game running can return with enough resources to buy many things at once. That skips the intended sequence in which a machine arrives, the player experiences its novelty and power increase, and several minutes pass before the next addition. Passive access therefore does not mean that active and passive play receive an equally satisfying reward cadence.</p>
+    <p>Emerson contrasts this with <em>A Game About Feeding a Black Hole</em>, whose main mode was deliberately designed to require active movement. The conversation presents these as different design choices rather than treating either level of activity as mandatory for incremental games.</p>
+
+    <h2>Balance backward from a fixed total</h2>
+    <p>Instead of allowing its principal number to grow indefinitely, <em>Execute</em> counts the world population down from approximately eight billion to zero. Robinson found it unusual and difficult to balance progression backward from a known ending.</p>
+    <p>An early implementation used an API to obtain the current population. When the call proved unreliable, he disabled it and updated the number manually. Current real-world accuracy was not considered worth introducing a failure point into the game. The related technical tradeoffs appear in <a href="./code-organization-performance-and-technical-constraints.html">Code Organization, Performance, and Technical Constraints</a>.</p>
+
+    <h2>Fantasy, tone, and nostalgia</h2>
+    <p>Robinson draws on Jonas Tyroller’s advice that a good game sells a fantasy. He describes <em>Execute</em> as offering a disturbing but recognizable destruction fantasy: a child who builds a block tower or elaborate Lego set may also want to crush it. The game asks what it would be like to destroy the world without consequences.</p>
+    <p>The handling of that fantasy is deliberately simplified. The result is gory and “messed up,” in Robinson’s description, but remains cartoony enough for the player to suspend the atrocities being performed. He also regards nostalgia as part of the game’s appeal. The fantasy, cartoon treatment, art, and nostalgic quality operate together rather than as separable mechanical rules.</p>
+
+    <h3>Abstracting the victims</h3>
+    <p>Robinson deliberately avoided depicting the victims as one identifiable group. His Brazilian artist initially drew a blue victim and red executioner. Robinson rejected that red-versus-blue division while noting that he lived in the United States and expected it to be an important market. He suggested gray figures; the artist preferred blue visually, and the figures became one blue group.</p>
+    <p>Players asked for randomly generated names or identifiable people. Robinson rejected that specificity because the game concerns eliminating the population and he did not want to represent the victims as particular real people.</p>
+    <p>He implemented but withheld a feature that could place an uploaded face on a victim. He believed the resulting images could be highly shareable, but also expected users to target inappropriate real people. Emerson agreed that the feature had promotional upside but substantial misuse and reputational risk. Robinson had not released it at the time of the conversation.</p>
+    <p>Robinson believes the genocide framing discouraged some creators from covering the game, including creators who redeemed keys without publishing coverage. This is his interpretation rather than a confirmed explanation from those creators. The visibility consequences are covered in <a href="./game-visibility-steam-launches-and-creator-outreach.html">Game Visibility, Steam Launches, and Creator Outreach</a>.</p>
+
+    <h2>Rebuilds and cuts in service of progression</h2>
+    <p>Robinson made <em>Execute</em> twice before completing its third version. He also made six versions of <em>Grid Tweaker</em>, stopped work on a seventh, and expected that he might rebuild it again. The repeated versions reflect his willingness to retain a useful idea while replacing an execution that is either beyond his current skills or no longer serving the design.</p>
+    <p>The first <em>Execute</em> was an early project that Robinson could not finish with the skills he then had. In the second version, he worried that the basic premise—use a guillotine to kill the world—was too small. Drawing on large, interconnected games such as <em>Melvour Idol</em> and <em>Idol Research</em>, he expanded it with:</p>
+    <ul>
+      <li>a large world map;</li>
+      <li>a robot army that could be launched to Earth;</li>
+      <li>a parasite that could also be launched;</li>
+      <li>a lightning minigame in which collected lightning charged the robots;</li>
+      <li>a large skill tree whose skills were automated machines requiring resources;</li>
+      <li>modular resource assignment for activating perks and producing their required resources.</li>
+    </ul>
+    <p>He concluded that this version was too bloated for him to organize and shelved it. For the third version, he combined parts of the simpler first design with selected ideas from the second. He removed much of the world map, many planned machines, and options that were individually appealing but did not add enough to the player experience.</p>
+    <p>His design reason was the progression curve. He believed players primarily wanted a satisfying progression and that the additional machines could disrupt it. Available time also allowed him to make only one curve feel satisfying, so he concentrated on that curve rather than retaining more options. He attributes part of the game’s reception to this focus.</p>
+    <p>These iterations also involved engine learning and code-organization constraints; their fuller production context is covered in <a href="./code-organization-performance-and-technical-constraints.html">Code Organization, Performance, and Technical Constraints</a>. The relationship between available time, feature cuts, and a sustainable project is treated more broadly in <a href="./project-scope-risk-and-sustainable-development.html">Project Scope, Risk, and Sustainable Development</a>.</p>
+
+    <h2>Two common forms of prestige</h2>
+    <p>Robinson describes prestige as a common incremental-game structure with two prevalent forms:</p>
+    <ol>
+      <li><strong>End-of-game prestige:</strong> the player completes the whole game and restarts with a benefit, in a structure comparable to New Game Plus.</li>
+      <li><strong>Stall-driven prestige:</strong> the player progresses until diminishing returns make further movement difficult, restarts with a multiplier such as doubled progression speed, reaches farther on the next run, and repeats the cycle.</li>
+    </ol>
+    <p>He preferred the second form but wanted the reset to belong to the main loop rather than function as an abstract multiplier or occur only after everyone in the world had been destroyed.</p>
+
+    <h2>Selling the built system in <em>Territory Idol</em> and <em>Execute</em></h2>
+    <p>Robinson credits <em>Territory Idol</em>, transcribed under that name, as the direct inspiration for <em>Execute</em>’s prestige structure. He describes it as a very old idle game that was among Steam’s best sellers roughly ten years earlier and no longer worked on many computers.</p>
+    <p>In <em>Territory Idol</em>, the player purchases territory squares with different functions: one may produce wheat, another soldiers, while a square of chanting monks may increase production. A new resource square requires gold. To obtain that gold, the player sells the kingdom made from the territories already built. The sale value determines the gold received; selling therefore restarts the system while also financing an expanded one.</p>
+    <p>Robinson adapted the act of selling the current productive system. In <em>Execute</em>, the player sells an execution pit—he speculatively describes the buyer as the devil, a stockholder, or whoever would buy such a pit—receives gold, and uses it to make the next pit more efficient. The prestige is therefore part of ordinary progression rather than a reset reserved for the end.</p>
+    <p>Old pits also remain visible and can be named. A first pit may continue killing one person per second while a second kills thirty per second. Retaining them lets the player see earlier stages beside the current system and makes progression through time visible rather than erasing all evidence of prior runs.</p>
+
+    <h2>Reward timing: planned intervals or repeated playtesting</h2>
+    <p>Thornity and Robinson use different approaches to timing incremental rewards. Thornity described specifying that events should occur every set number of seconds or minutes. After playing <em>Execute</em>, he told Robinson that its opening needed to be faster because he became bored within the first minute.</p>
+    <p>Robinson considers Thornity’s approach valid and says it is probably objectively correct when the goal is to maximize revenue and broad appeal by immediately fixing the player’s attention on the game. Online formulas can define this pacing through values and data structures.</p>
+    <p>Robinson instead followed an approach he attributes to Local Thunk, the developer of <em>Batro</em>, both transcribed under those names. In Robinson’s account, Local Thunk balanced the game by playing it hundreds of times and changing anything that felt bad. Robinson likewise repeatedly played and adjusted <em>Execute</em> rather than deriving its entire pace from a timing formula.</p>
+    <p>Approximately ten versions of <em>Execute</em> used different progression structures, each emphasizing a different machine. The game’s short length allowed Robinson to complete a run in about two hours, change values, and replay it. The achievement for beating the game in two hours and ten minutes reflects the approximate duration of his own repeated runs. He adjusted values throughout development until the progression felt fun.</p>
+    <p>Robinson felt that this gave the numbers personal, story-like beats and a more organic quality rather than making them feel sterile or engineered solely to extract a response. Blake Gocey characterizes it as a “guess and vibe check” approach with an intangible quality that a data-driven method may not capture. The conversation presents both timing methods as viable and does not resolve them into one prescribed method.</p>
+
+    <h2>Stalls, optimization, and limited decisions</h2>
+    <p><em>Execute</em> is substantially linear, but resource allocation affects how quickly the player progresses. That allocation can slow play and require thought. Robinson says it is not true strategy because there is ultimately only one option; he calls it “fake strategy.” Its intended benefit is that a tired player can make small decisions and feel strategic without facing the decision fatigue of a game such as <em>Civ</em> after work.</p>
+    <p>The possibility of a temporary stall is part of this structure. A player may be unable to afford an expected reward and ask why, look for a way to optimize the system, upgrade a different component to produce enough resources, or plan another method for the next run. Robinson argues that these small investigations and adjustments create a feeling of agency and make the game feel friendlier and more interesting.</p>
+
+    <h2>Predictable transactions and differences among players</h2>
+    <p>Robinson contrasts this structure with the black-hole game made by Aramus and Thornity. He calls their game awesome and praises both developers, but describes its rewards as transactional, binary, and linear: after each round, the player predictably earns enough for one or two upgrades, moves the mouse through another round, and receives another one or two upgrades. The lack of surprise is his criticism of the structure, not a claim that the game is unsuccessful or invalid.</p>
+    <p>He believes <em>Execute</em> reviewed better partly because a reward could remain out of reach and prompt optimization instead of arriving on every cycle. That claim is Robinson’s explanation of the reviews rather than a demonstrated causal finding.</p>
+    <p>The tradeoff depends on the audience. Some players want the predictable binary experience. Robinson compares formula-driven mass appeal with <em>Assassin’s Creed</em> and <em>Call of Duty</em>: consumers can enter a familiar structure without having to think deeply about what they are consuming. He considers that a valid way to make money, although it is not the experience he wants to create.</p>
+
+  </article>
+
+  <footer class="markdown-body">
+    <h4>Sources</h4>
+    <ol>
+      <li><a href="../raw/how-one-solo-dev-turned-a-small-game-into-a-cult-classic.txt">How One Solo Dev Turned a Small Game Into a Cult Classic</a></li>
+      <li><a href="../raw/payne-robinson-on-finding-good-game-ideas-and-making-a-success-game.txt">Payne Robinson: On finding good Game Ideas, and making a Success Game | Scope Creepers a Game Dev</a></li>
+    </ol>
+    <h4>Related pages</h4>
+    <ul>
+      <li><a href="./finding-testing-and-refining-game-ideas.html">Finding, Testing, and Refining Game Ideas</a></li>
+      <li><a href="./code-organization-performance-and-technical-constraints.html">Code Organization, Performance, and Technical Constraints</a></li>
+      <li><a href="./emerging-game-genres-and-market-timing.html">Emerging Game Genres and Market Timing</a></li>
+      <li><a href="./project-scope-risk-and-sustainable-development.html">Project Scope, Risk, and Sustainable Development</a></li>
+      <li><a href="./game-visibility-steam-launches-and-creator-outreach.html">Game Visibility, Steam Launches, and Creator Outreach</a></li>
+    </ul>
+  </footer>
+
+  <script src="./wiki-nav.js"></script>
+</body>
+</html>
