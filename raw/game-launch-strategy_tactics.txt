@@ -1,0 +1,19 @@
+Article title: Game Launch Strategy/Tactics
+Author/Speaker: Payne Robinson
+Date: 2026/01
+Source Url: https://youtu.be/aY15f9oZxpE?si=VTmCWT8RxLlKurD5
+
+
+1. Define success metrics: Establish clear goals, such as target sales or review counts, to set realistic expectations for your project.
+
+2. Create a demo: Develop a playable prototype, alpha, or beta version of your game to gauge player interest.
+
+3. Use an accessible platform: Host your demo on itch.io, which is favored for its low-friction browser accessibility and algorithm-driven visibility.
+
+4. Drive traffic: Share your demo link across relevant communities on platforms like Reddit and YouTube to build a seed audience.
+
+5. Monitor backend data: Regularly analyze your stats, specifically views, plays, and click-through rates. High traffic with low engagement often indicates that your thumbnail or title needs improvement, while low overall interest might suggest the game loop or onboarding needs refinement.
+
+6. Iterate or pivot: Based on the data, decide whether to scrap the project, refine the build, or continue development if the metrics are promising.
+
+7. Launch on Steam: Once you have a validated and polished demo, move your game to Steam. You can use the demo to gather wishlists and prepare for events like NextFest before the official release.

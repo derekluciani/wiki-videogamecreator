@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Code Organization, Performance, and Technical Constraints — Video Game Creator</title>
+  <title>Game Performance and Technical Constraints — Video Game Creator</title>
   <link href="./styles.css" rel="stylesheet">
 </head>
 <body>
@@ -18,40 +18,8 @@
   </nav>
 
   <article class="markdown-body">
-    <h1 class="wiki-title">Code Organization, Performance, and Technical Constraints</h1>
-    <p><em>How maintainability, runtime limits, batching, representational shortcuts, and implementation tradeoffs shape what a game can ship and display.</em></p>
-
-    <h2>Basic programming versus code organization</h2>
-    <p>Payne Robinson describes programming as a broad label for what often becomes a code-organization problem. A developer can learn a conditional statement or function, understand an engine’s basics, produce “Hello, world,” or move a character on screen through documentation and tutorials. The greater difficulty begins when multiple working elements must interact and continue working as more content is added.</p>
-    <p>He illustrates the progression of organizational decisions with enemies and save data:</p>
-    <ul>
-      <li>Should every enemy receive a separate script, or should one script hold the different parts of an enemy?</li>
-      <li>If those parts are reused across other enemies, where should the reusable parts be stored?</li>
-      <li>When those parts need to be saved, should their state go into an enemy-specific save script or a global save script?</li>
-    </ul>
-    <p>The problem is not only making two things interact once, but making that interaction work for similar things added later. Robinson characterizes this as an abstract way of thinking and repeatedly seeks an organization that remains modular.</p>
-
-    <h2>What established solutions can and cannot supply</h2>
-    <p>Robinson says developers can find useful organizational solutions for platformers, roguelike deck builders, and other genres whose common structures have been worked out. Those solutions can be reused and combined.</p>
-    <p>No tutorial, however, has already organized the exact game another developer is making. Following one project’s structure too closely can also make the result behave like that project. An original mechanic may create organizational requirements the tutorial never had, requiring a new solution for the unfamiliar behavior while established patterns continue to support the familiar parts.</p>
-
-    <h2>When experimental code becomes commercial code</h2>
-    <p><em>Execute</em> was not initially expected to become commercially viable, and Robinson says its code was poorly organized. Player requests after release appeared simple but were difficult to implement because the existing organization had painted him into a corner.</p>
-    <p>His specific example is a global script built around what he calls a “string-based dictionary.” The source does not specify its full implementation. Resources, save data, prestige, and interconnected machine behavior now make it costly to swap in apparently simple additions. Robinson knows how he could rewrite the structure but does not consider the required time worthwhile. In the prototype he was developing during the earlier conversation, he was instead spending substantial time establishing a modular foundation before that project grew.</p>
-    <p>One proposed redesign would have let players select a different machine each time they restarted a pit. Modularity alone would not have completed the feature: every machine would also need to be rebalanced against the linear chain of other machines. Robinson feared players would reject the linear design, but concluded from the released game’s reception that many primarily wanted to eliminate its population in approximately three hours and did not need all the proposed choices.</p>
-
-    <h2>Functional code and deferred cost</h2>
-    <p>Emerson describes himself as a “recovering software engineer” who deliberately accepts spaghetti-like code when stronger architecture would not improve the shipped player experience enough to justify its cost. Something can be good enough for the immediate project and may remain good enough forever. Robinson similarly argues that developers receive no player-facing credit for implementing a feature “100% better” when both versions work adequately.</p>
-    <p>The speakers also preserve the cost of that choice. Technical limitations in both games eventually required optimization, hard caps, or abandoned updates. More modular architecture might have made later work easier, but might also have delayed release without improving the game’s fun or sales. The source does not resolve that tradeoff into a universal preference for either clean architecture or rapid implementation.</p>
-    <p>When an engine-level solution is outside his interest or available time, Emerson often changes the design problem instead of altering the engine’s source. The broader relationship between “good enough” implementation and finishing appears in <a href="./project-scope-risk-and-sustainable-development.html">Project Scope, Risk, and Sustainable Development</a>.</p>
-
-    <h2>Separate demo content from shared systems</h2>
-    <p>Chris Zukowski recommends designing a Steam demo as a deliberately accelerated experience rather than exposing an unchanged opening from the full game. From a software perspective, he suggests separating code from content so the demo can swap or toggle its content, progression, and pacing without becoming an entirely independent game.</p>
-    <p>He acknowledges that this architectural separation is easier to recommend than implement. The advice identifies a desired capability rather than a prescribed code structure: shared systems should support a demo that removes slow setup, reaches representative play quickly, and can still benefit from fixes made to the full game. The player-facing reasons for that design appear in <a href="./steam-demos-festivals-launches-and-commercial-lifecycle.html">Steam Demos, Festivals, Launches, and Commercial Lifecycle</a>.</p>
-
-    <h2>Repeated versions as technical learning</h2>
-    <p>Robinson made <em>Execute</em> twice before producing the released third version. He built the first in the engine transcribed in the earlier source as “GDAU” and concluded that he lacked the skills to finish it. The second expanded into a world map, robot armies, a parasite, a lightning minigame, and a large skill tree of self-operating machines connected by assignable resources. He eventually found the interactions too difficult to organize and shelved it.</p>
-    <p>The released version returned to the smaller initial concept while retaining selected ideas. His other project, <em>Grid Tweaker</em>, had similarly passed through repeated Pico-8 versions. These iterations accompanied his willingness to preserve an idea while replacing an implementation that exceeded his current skills or organization. The design consequences are covered in <a href="./focused-game-design-progression-and-player-agency.html">Focused Game Design, Progression, and Player Agency</a>.</p>
+    <h1 class="wiki-title">Game Performance and Technical Constraints</h1>
+    <p><em>How runtime limits, batching, representational shortcuts, and implementation tradeoffs shape what a game can display while preserving its player-facing effect.</em></p>
 
     <h2>Protect the player-facing effect</h2>
     <p>Emerson identified the mass of visible objects in <em>A Game About Feeding a Black Hole</em> as part of the game’s central appeal, comparing it with the spectacle of the title transcribed as <em>Norp</em>. Optimization was therefore not simply a search for fewer objects. He first identified what the player needed to perceive, then changed the simulation and rendering beneath that effect.</p>
@@ -90,26 +58,23 @@
 
     <h2>Bounded AI assistance rather than open-ended generation</h2>
     <p>Emerson finds open-ended “vibe coding” difficult. He uses Claude more successfully when he can provide an existing slow implementation and ask for optimization of that bounded mathematical or performance problem. He used it to improve the boids and MultiMesh work after first understanding their basic structure.</p>
-    <p>Both speakers remain cautious about opaque output. They describe spending substantial time understanding generated code, receiving over-engineered solutions, and encountering unwanted hard-coded strings. AI is presented as useful for specific optimization or mathematical tasks, not as a replacement for understanding the game’s architecture.</p>
+    <p>Both speakers remain cautious about opaque output. They describe spending substantial time understanding generated code, receiving over-engineered solutions, and encountering unwanted hard-coded strings. AI is presented as useful for specific optimization or mathematical tasks, not as a replacement for understanding the game’s <a href="./code-architecture-and-organization.html">architecture</a>.</p>
   </article>
 
   <footer class="markdown-body">
     <h4>Sources</h4>
     <ol>
-      <li><a href="../raw/how-one-solo-dev-turned-a-small-game-into-a-cult-classic.txt">How One Solo Dev Turned a Small Game Into a Cult Classic</a></li>
       <li><a href="../raw/payne-robinson-on-finding-good-game-ideas-and-making-a-success-game.txt">Payne Robinson: On finding good Game Ideas, and making a Success Game | Scope Creepers a Game Dev</a></li>
       <li><a href="../raw/your-indie-game-is-probably-too-normal.txt">Your Indie Game Is Probably Too Normal</a></li>
-      <li><a href="../raw/youre-missing-the-best-time-ever-to-make-a-video-game.txt">You’re Missing The Best Time Ever To Make A Video Game</a></li>
     </ol>
     <h4>Related pages</h4>
     <ul>
-      <li><a href="./learning-game-development-through-constraints-and-experiments.html">Learning Game Development Through Constraints and Experiments</a></li>
-      <li><a href="./project-scope-risk-and-sustainable-development.html">Project Scope, Risk, and Sustainable Development</a></li>
-      <li><a href="./focused-game-design-progression-and-player-agency.html">Focused Game Design, Progression, and Player Agency</a></li>
+      <li><a href="./code-architecture-and-organization.html">Code Architecture and Organization</a></li>
+      <li><a href="./progression-rewards-and-player-agency.html">Progression, Rewards, and Player Agency</a></li>
       <li><a href="./finding-testing-and-refining-game-ideas.html">Finding, Testing, and Refining Game Ideas</a></li>
       <li><a href="./game-mechanics-variants-and-transformations.html">Game Mechanics, Variants, and Transformations</a></li>
       <li><a href="./game-visibility-trailers-and-creator-outreach.html">Game Visibility, Trailers, and Creator Outreach</a></li>
-      <li><a href="./steam-demos-festivals-launches-and-commercial-lifecycle.html">Steam Demos, Festivals, Launches, and Commercial Lifecycle</a></li>
+      <li><a href="./project-scope-risk-and-sustainable-development.html">Project Scope, Risk, and Sustainable Development</a></li>
     </ul>
   </footer>
 
