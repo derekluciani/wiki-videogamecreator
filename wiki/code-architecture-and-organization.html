@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Code Organization, Performance, and Technical Constraints — Video Game Creator</title>
+  <title>Code Architecture and Organization — Video Game Creator</title>
   <link href="./styles.css" rel="stylesheet">
 </head>
 <body>
@@ -14,12 +14,12 @@
       <button type="button" data-text-size="decrease" aria-label="Decrease text size">A-</button>
       <button type="button" data-text-size="increase" aria-label="Increase text size">A+</button>
     </div>
-    <p><a href="./game-mechanics-variants-and-transformations.html">Game Mechanics, Variants, and Transformations →</a></p>
+    <p><a href="./game-performance-and-technical-constraints.html">Game Performance and Technical Constraints →</a></p>
   </nav>
 
   <article class="markdown-body">
-    <h1 class="wiki-title">Code Organization, Performance, and Technical Constraints</h1>
-    <p><em>How maintainability, runtime limits, batching, representational shortcuts, and implementation tradeoffs shape what a game can ship and display.</em></p>
+    <h1 class="wiki-title">Code Architecture and Organization</h1>
+    <p><em>How dependencies, modular systems, data boundaries, execution order, and implementation tradeoffs shape code that can change and grow.</em></p>
 
     <h2>Basic programming versus code organization</h2>
     <p>Payne Robinson describes programming as a broad label for what often becomes a code-organization problem. A developer can learn a conditional statement or function, understand an engine’s basics, produce “Hello, world,” or move a character on screen through documentation and tutorials. The greater difficulty begins when multiple working elements must interact and continue working as more content is added.</p>
@@ -35,22 +35,45 @@
     <p>Robinson says developers can find useful organizational solutions for platformers, roguelike deck builders, and other genres whose common structures have been worked out. Those solutions can be reused and combined.</p>
     <p>No tutorial, however, has already organized the exact game another developer is making. Following one project’s structure too closely can also make the result behave like that project. An original mechanic may create organizational requirements the tutorial never had, requiring a new solution for the unfamiliar behavior while established patterns continue to support the familiar parts.</p>
 
+    <h2>Recognize structural signs of spaghetti code</h2>
+    <p>In professional software engineering, Jonas Tyroller defines spaghetti code as a codebase with a convoluted, tangled control structure that often lacks clean, modular design. Its execution paths become difficult to follow or maintain. He identifies four technical indicators:</p>
+    <ul>
+      <li><strong>Tight coupling:</strong> components are intertwined, so changing one area forces unintended changes in unrelated areas.</li>
+      <li><strong>Lack of encapsulation:</strong> systems or logic modules are not isolated enough to be reused, tested, or replaced independently.</li>
+      <li><strong>Unpredictable global state:</strong> information moves haphazardly instead of through controlled interfaces or defined data hubs.</li>
+      <li><strong>Implicit dependencies:</strong> code relies on obscure side effects or unmanaged execution order, including behavior arising from default engine setups.</li>
+    </ul>
+    <p>Tyroller describes code that grows without a formal architectural plan as a “big ball of mud.” The culminating problem is that the complexity of the connections between components exceeds the complexity of the features themselves.</p>
+
     <h2>Keep dependencies within the application hierarchy</h2>
     <p>The Shaggy Dev presents a non-exhaustive collection of practices for keeping code receptive to change. The foundational practice is to respect the hierarchy present in every application: dependencies should flow down the hierarchy rather than upward or laterally, and should generally reach only one level down. An object that depends only on its own area of responsibility can operate without assumptions about the application state and structure around it.</p>
     <p>An isolated player can be placed in an ordinary level, a structurally different bonus mode, or an interactive level-selection menu. If it instead assumes that it always has a sibling named <code>items</code>, that the sibling directly contains coin objects, and that each coin exposes a particular sound-effect function, every location must reproduce that structure whether it needs it or not. Changes to those parent or sibling implementations can then break the player even though they are not part of the player’s responsibility.</p>
     <p>Dependencies that reach too far downward create a similar problem. A player can ask an animation container to change an animation, but should not manipulate the individual frames or their bitmap data. If the implementation later changes from separate images to a sprite sheet, the player remains unaffected when it knows only how to request the high-level animation change.</p>
 
-    <h2>Keep data and its operating logic together</h2>
+    <h2>Keep operating data with its logic</h2>
     <p>The Shaggy Dev generally recommends keeping data beside the logic that operates on it rather than retrieving an object’s data and changing it elsewhere. Generic utility functions may be an exception. In the animation example, the player should call a function on the animation container instead of accessing the container’s internal data and performing the transition itself.</p>
     <p>This keeps animation behavior in animation-oriented code and limits unexpected external changes to its state. If an animation fails, the relevant logic remains in the container rather than an arbitrary function elsewhere in the application. The container can also expose one consistent interface to enemies, NPCs, and the player. The speaker cautions that this separation can erode when a developer makes what appears to be one small, exceptional change.</p>
 
-    <h2>Compose behavior from components</h2>
+    <h2>Separate immutable gameplay data from code</h2>
+    <p>Tyroller separately recommends keeping immutable gameplay data, such as balancing values and text, outside executable code. He advises designing the game’s database early, ideally using spreadsheets or scriptable objects. The stated benefits are easier balancing and modding.</p>
+    <p>This recommendation concerns immutable gameplay data. The Shaggy Dev’s adjacent recommendation concerns keeping an object’s operating state with the logic that changes it.</p>
+
+    <h2>Compose reusable behavior from components</h2>
     <p>Rather than building large monolithic objects or relying excessively on inheritance, The Shaggy Dev recommends composing complex objects from smaller, self-sufficient components. A player, several enemy types, and breakable crates may all need health behavior. A health component—or a broader stats component—can standardize and contain the required data and functions instead of making each object maintain a separate implementation.</p>
-    <p>Components can make code easier to organize and reuse while avoiding inherited functionality that an object does not need. In the source’s examples, composition and dependency injection can support generic movement, health, AI, and other behaviors across different objects.</p>
+    <p>Tyroller similarly recommends independent modules for behavior such as health or movement and explicitly proposes reusing them in future projects to save time. Components can make code easier to organize, test, replace, and reuse while avoiding inherited functionality that an object does not need.</p>
+
+    <h2>Connect reusable modules with project-specific glue</h2>
+    <p>Tyroller recommends connecting independent systems through dedicated, non-reusable glue scripts or in-engine events rather than direct references between the systems themselves. The isolated modules remain reusable while the glue is specific to one game.</p>
 
     <h2>Inject references needed at runtime</h2>
     <p>The Shaggy Dev defines dependency injection as supplying references to objects at runtime rather than compile time. It addresses cases in which an object still needs access outside its direct descendants. A state, for example, may sit below the object that owns it while needing to control that parent.</p>
-    <p>Hard-coding the parent reference would require a separate state machine for every object. Instead, the state can be written to control a compatible type, such as a rigid body, without referring to the eventual owner. At runtime, a parent passes the state a reference to itself. The state can then control that particular object while remaining reusable.</p>
+    <p>Hard-coding the parent reference would require a separate state machine for every object. Instead, the state can be written to control a compatible type, such as a rigid body, without referring to the eventual owner. At runtime, a parent passes the state a reference to itself. The state can then control that particular object while remaining reusable. In the source’s examples, composition and dependency injection can support generic movement, health, AI, and other behaviors across different objects.</p>
+
+    <h2>Control execution order in complex projects</h2>
+    <p>For complex projects, Tyroller recommends manually controlling the execution order of scripts rather than relying on an engine’s default order. The aim is to prevent unpredictable behavior and implicit dependencies created by unmanaged execution order.</p>
+
+    <h2>Separate simulation from view</h2>
+    <p>Tyroller recommends separating game logic—the simulation—from rendering and visuals—the view. The view should read from the simulation, reducing interdependencies between behavior and presentation.</p>
 
     <h2>Prioritize design patterns selectively</h2>
     <p>The Shaggy Dev recommends learning established solutions to recurring software problems rather than repeatedly creating replacements, while not treating every pattern as an advance prerequisite. Broader software-architecture study may be useful for developers pursuing systems-driven games. The speaker’s initial priorities are:</p>
@@ -69,7 +92,7 @@
     <h2>Functional code and deferred cost</h2>
     <p>Emerson describes himself as a “recovering software engineer” who deliberately accepts spaghetti-like code when stronger architecture would not improve the shipped player experience enough to justify its cost. Something can be good enough for the immediate project and may remain good enough forever. Robinson similarly argues that developers receive no player-facing credit for implementing a feature “100% better” when both versions work adequately.</p>
     <p>The speakers also preserve the cost of that choice. Technical limitations in both games eventually required optimization, hard caps, or abandoned updates. More modular architecture might have made later work easier, but might also have delayed release without improving the game’s fun or sales. The source does not resolve that tradeoff into a universal preference for either clean architecture or rapid implementation.</p>
-    <p>When an engine-level solution is outside his interest or available time, Emerson often changes the design problem instead of altering the engine’s source. The broader relationship between “good enough” implementation and finishing appears in <a href="./project-scope-risk-and-sustainable-development.html">Project Scope, Risk, and Sustainable Development</a>.</p>
+    <p>When an engine-level solution is outside his interest or available time, Emerson often changes the design problem instead of altering the engine’s source. The resulting performance and implementation tradeoffs appear in <a href="./game-performance-and-technical-constraints.html">Game Performance and Technical Constraints</a>, while the broader relationship between “good enough” implementation and finishing appears in <a href="./project-scope-risk-and-sustainable-development.html">Project Scope, Risk, and Sustainable Development</a>.</p>
 
     <h2>Improve architecture through practice</h2>
     <p>The Shaggy Dev likewise argues against spending weeks at the start of a project trying to perfect code before its requirements are known or even a small vertical slice exists. Trying to learn every design pattern immediately can replace practice with theory, cause burnout, and leave a developer without direct experience of why or how a pattern helps. In the speaker’s formulation, a game with mediocre code that ships is preferable to a perfectly coded game that never does.</p>
@@ -79,67 +102,26 @@
     <p>Chris Zukowski recommends designing a Steam demo as a deliberately accelerated experience rather than exposing an unchanged opening from the full game. From a software perspective, he suggests separating code from content so the demo can swap or toggle its content, progression, and pacing without becoming an entirely independent game.</p>
     <p>He acknowledges that this architectural separation is easier to recommend than implement. The advice identifies a desired capability rather than a prescribed code structure: shared systems should support a demo that removes slow setup, reaches representative play quickly, and can still benefit from fixes made to the full game. The player-facing reasons for that design appear in <a href="./steam-demos-festivals-launches-and-commercial-lifecycle.html">Steam Demos, Festivals, Launches, and Commercial Lifecycle</a>.</p>
 
-    <h2>Repeated versions as technical learning</h2>
+    <h2>Repeated versions as architectural learning</h2>
     <p>Robinson made <em>Execute</em> twice before producing the released third version. He built the first in the engine transcribed in the earlier source as “GDAU” and concluded that he lacked the skills to finish it. The second expanded into a world map, robot armies, a parasite, a lightning minigame, and a large skill tree of self-operating machines connected by assignable resources. He eventually found the interactions too difficult to organize and shelved it.</p>
-    <p>The released version returned to the smaller initial concept while retaining selected ideas. His other project, <em>Grid Tweaker</em>, had similarly passed through repeated Pico-8 versions. These iterations accompanied his willingness to preserve an idea while replacing an implementation that exceeded his current skills or organization. The design consequences are covered in <a href="./focused-game-design-progression-and-player-agency.html">Focused Game Design, Progression, and Player Agency</a>.</p>
-
-    <h2>Protect the player-facing effect</h2>
-    <p>Emerson identified the mass of visible objects in <em>A Game About Feeding a Black Hole</em> as part of the game’s central appeal, comparing it with the spectacle of the title transcribed as <em>Norp</em>. Optimization was therefore not simply a search for fewer objects. He first identified what the player needed to perceive, then changed the simulation and rendering beneath that effect.</p>
-    <p>His summary is that game development can rely on illusion: behavior need not be physically correct if it continues to look and feel right. Optimization choices were judged by whether they protected the visible scale and motion that made the game satisfying.</p>
-
-    <h2>Replacing physics with simpler behavior</h2>
-    <p>The objects originally used Godot physics so they could bunch together, collide, and rotate at different speeds. The physics calculations proved expensive and imposed hard limits on the number of objects.</p>
-    <p>Programmer Nick Glenn suggested replacing full physics with a simpler boids-like spacing system. Each object followed limited behavioral rules that moved it away from nearby objects rather than participating in a complete physical simulation. Emerson followed a guide to implement the initial version and reports that players did not complain about or apparently notice the change.</p>
-    <p>Simple rotational movement continued every frame. The more expensive spacing behavior was batched so that only approximately one-third of the objects received a boids-related velocity update during a frame. Emerson adjusted the batch size and frequency until the result felt acceptable.</p>
-
-    <h2>Batch rendering with MultiMeshInstance</h2>
-    <p>For the many pieces flowing into the black hole, Emerson used Godot’s <code>MultiMeshInstance</code>. In his description, thousands of ordinary sprites could require thousands of draw calls, while repeated instances of one texture could be sent as one batched rendering operation.</p>
-    <p>Instance identifiers allowed the game to change transforms and colors for individual pieces; Emerson also describes skew and shader changes as available capabilities, although he did not use all of them. The game moved each piece toward the center with a formula. As the number of pieces grew into the thousands, further optimization of this system became important.</p>
-
-    <h2>Perceptual culling and representational scale</h2>
-    <p>Later in the black-hole game, the output from smaller asteroids was deliberately reduced from roughly 15–20 visible pieces to one. At the same time, newly important planets and stars became physically larger on screen. Thornity proposed allowing those larger objects to draw attention away from the declining quantity of small pieces.</p>
-    <p>Emerson reports that almost no one noticed the reduction, although one player asked for a way to keep the larger quantity. The method preserved the impression of increasing scale while lowering the amount the game needed to display.</p>
-    <p><em>Execute</em> used another representational shortcut. Robinson initially wanted a grid of 64×64 guillotine sprites to grow indefinitely and become progressively smaller. Godot would not continue scaling the grid as intended without a more elaborate canvas workaround, so he changed the presentation. A shader made a purchase appear to add guillotines behind an existing one, while some real instances were also added. Later, approximately 50 people could be rolled into one bundle, and a “mega guillotine” animation could represent roughly 100 executions in one chop.</p>
-
-    <h2>Pooling, instantiation, and remaining limits</h2>
-    <p>The black-hole game pooled effects and gradually instantiated needed objects while loading, avoiding most runtime creation. In <em>Execute</em>, most visible units were texture rectangles rather than spawned sprites.</p>
-    <p>The nuke sequence was an exception: workers spawned, collected iron, carried it to the nuke, and deposited it. Creating many of them together caused lag. Robinson had an object pool, but says pooling did not improve the sequence enough, and he chose not to investigate further. Object pooling is therefore presented as one technique rather than a complete solution to every performance problem.</p>
-
-    <h2>Procedural visuals and layered UI</h2>
-    <p>The black-hole game’s asteroids were procedurally generated with Godot <code>Polygon2D</code> and <code>Line2D</code> nodes, with AI assistance. Duplicated polygon and line layers represented health, while a clipped progress bar revealed the underlying color as damage accumulated. Emerson calls the construction “stupid” in an affectionate sense: the nodes were used in an unusual but effective way to create the intended appearance.</p>
-
-    <h2>Construct visual assets through unconventional processes</h2>
-    <p>Robinson uses <em>Hylics</em> to describe an accessible physical-to-digital process he calls rasterization. In his account, its creator made forms from clay, photographed them, cut the photographs out in Photoshop, imported them, lowered their resolution, forced their colors into a limited palette, and dithered them. He argues that the assets were constructed and transformed rather than conventionally drawn, and claims that most viewers could make the demonstrated clay shape. “Rasterization” is retained here as Robinson’s terminology and explanation.</p>
-    <p>Robinson says a related technique was used to make <em>Medium Rare</em> and the title transcribed as <em>A Meaningless Random Numbers</em>. In another visually demonstrated example whose exact game is unclear from the transcript, textures do not match and wood textures visibly repeat. He reads that appearance as a willingness to assemble available materials rather than attempt the consistency of a production such as <em>Call of Duty</em>.</p>
-    <p>His broader claim is that indie developers can create interesting and entertaining work by breaking visual and production conventions rather than competing directly on conventional polish. The corresponding design framework appears in <a href="./game-mechanics-variants-and-transformations.html">Game Mechanics, Variants, and Transformations</a>, while the intended effect on audience curiosity appears in <a href="./game-visibility-trailers-and-creator-outreach.html">Game Visibility, Trailers, and Creator Outreach</a>.</p>
-
-    <h2>A custom animation system and timer caps</h2>
-    <p>Robinson did not use Godot <code>AnimationPlayer</code> nodes in <em>Execute</em>. His custom system uses a timer to advance through an array of individual PNGs, with a second timer used for some behavior between frames. He prefers separate PNGs to sprite sheets because he can directly replace an array of images and understand what is changing.</p>
-    <p>The preference carries a runtime limit. Robinson found Godot timers unreliable at very short intervals such as approximately <code>0.002</code>, particularly in a browser or on older computers. Speed upgrades therefore received hard caps; without them, an apparent upgrade could make the game run more slowly rather than more quickly.</p>
-    <p>An API that supplied the current world population created a similar reliability tradeoff. Robinson disabled it and manually updated the population rather than allow an external call to disrupt play.</p>
-
-    <h2>Bounded AI assistance rather than open-ended generation</h2>
-    <p>Emerson finds open-ended “vibe coding” difficult. He uses Claude more successfully when he can provide an existing slow implementation and ask for optimization of that bounded mathematical or performance problem. He used it to improve the boids and MultiMesh work after first understanding their basic structure.</p>
-    <p>Both speakers remain cautious about opaque output. They describe spending substantial time understanding generated code, receiving over-engineered solutions, and encountering unwanted hard-coded strings. AI is presented as useful for specific optimization or mathematical tasks, not as a replacement for understanding the game’s architecture.</p>
+    <p>The released version returned to the smaller initial concept while retaining selected ideas. His other project, <em>Grid Tweaker</em>, had similarly passed through repeated Pico-8 versions. These iterations accompanied his willingness to preserve an idea while replacing an implementation that exceeded his current skills or organization. The progression consequences are covered in <a href="./progression-rewards-and-player-agency.html">Progression, Rewards, and Player Agency</a>.</p>
   </article>
 
   <footer class="markdown-body">
     <h4>Sources</h4>
     <ol>
+      <li><a href="../raw/best-code-architectures-for-indie-games.txt">Best Code Architectures For Indie Games</a></li>
       <li><a href="../raw/how-one-solo-dev-turned-a-small-game-into-a-cult-classic.txt">How One Solo Dev Turned a Small Game Into a Cult Classic</a></li>
       <li><a href="../raw/how-to-write-more-flexible-game-code.txt">How to write more flexible game code</a></li>
       <li><a href="../raw/payne-robinson-on-finding-good-game-ideas-and-making-a-success-game.txt">Payne Robinson: On finding good Game Ideas, and making a Success Game | Scope Creepers a Game Dev</a></li>
-      <li><a href="../raw/your-indie-game-is-probably-too-normal.txt">Your Indie Game Is Probably Too Normal</a></li>
       <li><a href="../raw/youre-missing-the-best-time-ever-to-make-a-video-game.txt">You’re Missing The Best Time Ever To Make A Video Game</a></li>
     </ol>
     <h4>Related pages</h4>
     <ul>
+      <li><a href="./game-performance-and-technical-constraints.html">Game Performance and Technical Constraints</a></li>
       <li><a href="./learning-game-development-through-constraints-and-experiments.html">Learning Game Development Through Constraints and Experiments</a></li>
       <li><a href="./project-scope-risk-and-sustainable-development.html">Project Scope, Risk, and Sustainable Development</a></li>
-      <li><a href="./focused-game-design-progression-and-player-agency.html">Focused Game Design, Progression, and Player Agency</a></li>
-      <li><a href="./finding-testing-and-refining-game-ideas.html">Finding, Testing, and Refining Game Ideas</a></li>
-      <li><a href="./game-mechanics-variants-and-transformations.html">Game Mechanics, Variants, and Transformations</a></li>
-      <li><a href="./game-visibility-trailers-and-creator-outreach.html">Game Visibility, Trailers, and Creator Outreach</a></li>
+      <li><a href="./progression-rewards-and-player-agency.html">Progression, Rewards, and Player Agency</a></li>
       <li><a href="./steam-demos-festivals-launches-and-commercial-lifecycle.html">Steam Demos, Festivals, Launches, and Commercial Lifecycle</a></li>
     </ul>
   </footer>
