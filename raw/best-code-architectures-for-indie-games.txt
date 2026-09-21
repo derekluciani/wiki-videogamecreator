@@ -1,0 +1,32 @@
+Article title: Best Code Architectures For Indie Games
+Author/Speaker: Jonas Tyroller
+Date: 2025/08
+Source Url: https://youtu.be/8WqYQ1OwxJ4?si=h8rPHheYo8x2bDf6
+
+What is Spaghetti Code and why is it a problem?
+
+In professional software engineering, spaghetti code refers to a codebase with a convoluted and tangled control structure, often lacking a clean, modular design. It is characterized by 'spaghetti-like' paths of execution that are difficult for developers to follow or maintain.
+
+Key technical indicators include:
+
+Tight Coupling: Components are deeply intertwined, meaning a change in one area forces unintended modifications in unrelated parts of the system.
+
+Lack of Encapsulation: Systems or logic modules are not properly isolated, making it impossible to reuse, test, or replace individual parts of the codebase.
+
+Unpredictable Global State: Information flows haphazardly through the system rather than through controlled, predictable interfaces or defined data hubs.
+
+Implicit Dependencies: Parts of the code rely on obscure, side-effect-heavy behaviors or unmanaged execution orders, which are common in default engine setups.
+
+Essentially, it is code that has grown without a formal architectural plan, resulting in a 'big ball of mud' where the complexity of the connections between components eventually exceeds the complexity of the features themselves.
+
+What are the best code architectures for indie games?
+
+Reusable Modules: Create independent, isolated systems (like health or movement) that can be reused in future projects to save time.
+
+Glue Code: Use dedicated, non-reusable scripts or in-engine events to connect independent systems, avoiding direct references between them.
+
+Data Separation: Keep immutable gameplay data (like balancing or text) separate from the code. Design your database early, ideally using spreadsheets or scriptable objects, to make balancing and modding easier.
+
+Controlled Execution: For complex projects, manually control the execution order of your scripts to avoid unpredictable behavior caused by the default engine order.
+
+Simulation vs. View: Separate your game logic (simulation) from your rendering/visuals (view). The view should simply read from the simulation, which reduces interdependencies.
